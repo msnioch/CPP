@@ -1,55 +1,60 @@
-﻿//The number of Fibonacci indexes will be push on stack and print.
+﻿//Fibonacci numbers on stack. The number of Fibonacci indexes will be push on the stack structure. v2
 
 #include <iostream>
+
 using namespace std;
 
-int a = 1, b = 1, temp;
+int a = 1, b = 1;                       //First and second index of Fibonacci sequence assigned by value 1.
 
-class node
+int temp;                               //Variable temporary integer declatarion.
+
+class Node
 {
 public:
-    int data;
+                                        //Attributes declaration in class Node.
+    int data;                           //Variable integer data in class Node.
 
-    node* next;
+    Node *next;                         //Pointer will points to the next node.
 
-    node(int y)
+    Node (int y)                        //Constructor with variable y.
     {
-        data = y;
+        data = y;                       //Variable data assigned by value y.
 
-        next = NULL;
+        next = NULL;                    //Pointer adress default assigned by NULL.
     }
 };
 
-class stack
+class Stack
 {
 public:
-    node* head;
+                                        //Attributes declaration in class Stack.
+    Node *head;                         //Pointer will points to Stack head.
 
-    stack()
+    Stack()                             //Constructor of class Stack.
     {
-        head = NULL;
+        head = NULL;                    //Pointer adress default assigned by NULL.
     }
 
-    ~stack()
+    ~Stack()                            //Destructor will delete all nodes after programm.
     {
         while (head != NULL)
         {
-            node* del = head;
+            Node *del = head;           //Pointer assigned by head adress.
 
-            head = head->next;
+            head = head -> next;        //Adress to the next node assigned as head.
 
-            delete[] del;
+            delete [] del;              //Delete currently del adress.
         }
     }
 
-    void push(node* n)
+    void Push (Node *n)                 //Add node on the stack.
     {
-        n->next = head;
+        n -> next = head;               //Pointer of currently node assigned by previous head adress.
 
-        head = n;
+        head = n;                       //Currently node adress is assign as head.
     }
 
-    bool isEmpty()
+    bool IsEmpty()                      //Test if the stack is empty.
     {
         if (head == NULL)
 
@@ -60,77 +65,81 @@ public:
             return false;
     }
 
-    void pop()
+    void Pop()                          //Delete currently head node.
     {
-        if (isEmpty() == true)
+        if (IsEmpty() == true)          //Test if the stack is empty.
         {
             cout << "The stack is empty!" << endl;
         }
 
         else
         {
-            node* del = head;
+            Node *del = head;           //Pointer assigned by head adress.
 
-            head = head->next;
+            head = head -> next;        //Adress to the next node assigned as head.
 
-            delete[] del;
+            delete [] del;              //Delete currently del adress.
 
-            if (isEmpty() == true)
+            if (IsEmpty() == true)      //Test if the stack is empty.
             {
                 cout << "The stack is empty!" << endl;
             }
         }
     }
 
-    void print()
+    void Print()                        //Print the stack data from head.
     {
-        node* ptr = head;
+        Node *ptr = head;
 
         while (ptr != NULL)
         {
-            cout << ptr->data << endl;
+            cout << ptr -> data << endl;
 
-            ptr = ptr->next;
+            ptr = ptr -> next;          //Adress to the next node assigned as ptr.
         }
     }
 };
 
 int main()
 {
-    int how;
+    int how;                            //Number of Fibonacci indexes.
 
-    cout << "$$$$$ Fibonacci Numbers. $$$$$\nEnter a whole number of indexes: ";
+    cout << "$$$$$ Fibonacci Numbers. $$$$$" << endl;
+    
+    cout << "Enter a whole number of indexes: ";
 
-    cin >> how;
+    cin >> how;                         //Assign user input to variable how.
 
-    cout << "\nYou see under " << how << " Fibonacci indexes are pushed on the stack.\n" << endl;
+    cout << endl << how << " Fibbonacci indexes are pushed on the stack." << endl << endl;
 
-    stack S;
+    Stack Fib_stack;                    //Create stack with name fib_stack.
 
-    node* n0 = new node(a);
+    Node *n0 = new Node(a);             //Create first node and assign by value of variable integer a.
 
-    S.push(n0);
+    Fib_stack.Push(n0);                 //Push node in stack.
 
-    node* n1 = new node(b);
+    Node *n1 = new Node(b);             //Create second node and assign by value of variable integer b.
 
-    S.push(n1);
+    Fib_stack.Push(n1);                 //Push node in stack.
 
     for (int i = 2; i < how; i++)
     {
-        node* n = new node(a + b);      //New node with next Fibonacci index.
+        Node *n = new Node (a + b);     //New node with next Fibonacci index.
 
-        S.push(n);
+        Fib_stack.Push(n);
 
         temp = a;
 
-        a = (a + b);        //Value of next Fibonacci index.
+        a = (a + b);                    //Value of next Fibonacci index.
 
         b = temp;
     }
 
-    S.pop();
+    Fib_stack.Pop();                    //Delete currently head node.
 
-    S.print();
+    Fib_stack.Print();                  //Print the stack data from head.
+
+    system("PAUSE");                    //Hold console after programm.
 
     return 0;
 }
