@@ -1,30 +1,30 @@
-How many times the loop for (int i = -5; i <= 4; i++) will be execute:
-9 times
-10 times
-not once
-it will perform forever
+What means the unsigned modifier in the integer declatation?
+variable can hold integer and double numbers
+variable can hold only positive integer values
+variable can hold negative and positive integer numbers
+variable can hold only positive double numbers
 b
-What means the static modifier in the expression: static int number ?
-variable number belong to the object
-variable number belong belong to itself
-variable number belong to the object and class
-variable number belong to the class
+Which declaration of template function parameters list is correct?
+template (class T, class U)
+template [class T, class U]
+template <class T, class U>
+template >> class T, class U;
+c
+How many times the loop for (int i = -4; i <= 5; i++) will be execute:
+9 times
+it will perform forever
+not once
+10 times
 d
-Which declaration of Collection list is correct?
-private [] List<int> list = new List<int>[number];
-public List<int> list [number] = new List<int>[number];
-public [number] List<int> list = new List<int>[];
-private [] List<int> list = new List<int>();
-a
+Which declaration of vector container is correct?
+vector MyContainer<int>;
+vector<int> MyContainer;
+<int>vector MyContainer;
+vector[int] MyContainer;
+b
 A recursive method is a:
+method that calls itself
 variable that calls itself
 argument that calls itself
-method that calls itself
 condition that calls itself
-c
-Which declaration of generics is correct?
-static void Swap [T] (ref T a, ref T b)
-static void Swap <T> (ref T a, ref T b)
-static void <T> Swap (ref T a, ref T b)
-static void Swap (ref T a, ref T b)
-b
+a
