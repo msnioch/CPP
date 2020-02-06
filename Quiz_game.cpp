@@ -1,7 +1,8 @@
-﻿/*Quiz game v2 - it's a game that read the questions from a text file. The application'll try to open the text file in application folder.
+﻿/*Quiz game v4 - it's a game that read the questions from a text file. The application'll try to open the text file in application folder.
  * If opening the text file fails, you will be asked for the file path.*/
 
 #include <iostream>
+#include <memory>                                                       //Library for unique_ptr and make_unique.
 #include <fstream>                                                      //Library for input data from file output to file
 #include <string>                                                       //Library for getline()
 #include <algorithm>                                                    //Library for transform()
@@ -93,7 +94,7 @@ public:
 
         cout << "d) " << answer_D << endl;                              //Show the answer d.
 
-        cout << "\nWrite answer a, b, c or d: ";                        //Show the user answers.
+        cout << "\nWrite correct answer a, b, c or d and press ENTER: ";    //Show the user answers.
 
         CheckAnswer();
     }
@@ -134,7 +135,7 @@ bool File_Exists (string &patch)                                        //Functi
 
     if (! file.good())                                                  //Negation if the patch is correct.
     {
-        cout << "\nThe question file doesn't exists!\nPlease enter the quesion file patch or write END to exit application: ";
+        cout << "\nThe question file doesn't exists!\nPlease write the quesion file patch or write END then press ENTER to exit application: ";
         
         cin >> patch;                                                   //Change file patch or exit application with command END.
         
@@ -172,7 +173,7 @@ int how_Many_Lines()                                                    //Functi
     return line_Counter;
 }
 
-void main()
+int main()
 {
     cout << "*************** C++ Quiz ***************" << endl;
 
@@ -184,16 +185,18 @@ void main()
 
     int how_Many_Questions = how_Many_Lines() / 6;                      //Compute number of questions in file. One question has 6 lines.
     
-    Quiz* Question = new Quiz [how_Many_Questions];                     //Declarate dynamic array of class Question.
+    unique_ptr<Quiz[]> Question = make_unique<Quiz[]> (how_Many_Questions);     //Declarate dynamic allocated array of class Quiz with smart pointer.
+
+    //Quiz* Question = new Quiz [how_Many_Questions];                   //Dynamic allocated array with raw pointer (possible instead smart pointer).
 
     for (int question_Number = 0; question_Number < how_Many_Questions; question_Number++)  //Loop controls question number.
     {
         system("CLS");                                                  //The method clear console.
 
-        Question[question_Number].Load (question_Number + 1);           //Creates new object of class Question.
+        Question[question_Number].Load (question_Number + 1);           //Create new object of class Quiz.
     }
 
-    delete[] Question;                                                  //Delete the dynamic array of class Question.
+    //delete[] Question;                                                //Delete dynamic allocated array (only in case raw pointer).
 
     system("CLS");                                                      //The method clear console.
 
@@ -214,5 +217,9 @@ void main()
 
     cout << "\n*************** End Quiz ***************" << endl;
 
+    cout << "Press ENTER to exit.";
+
     getchar();  getchar();                                              //Stop console.
+
+    return 0;
 }
