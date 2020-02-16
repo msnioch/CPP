@@ -1,0 +1,30 @@
+What means the unsigned modifier in the integer declatation?
+variable can hold integer and double numbers
+variable can hold only positive integer values
+variable can hold negative and positive integer numbers
+variable can hold only positive double numbers
+b
+Which declaration of template function parameters list is correct?
+template (class T, class U)
+template [class T, class U]
+template <class T, class U>
+template >> class T, class U;
+c
+How many times the loop for (int i = -4; i <= 5; i++) will be execute:
+9 times
+it will perform forever
+not once
+10 times
+d
+Which declaration of vector container is correct?
+vector MyContainer<int>;
+vector<int> MyContainer;
+<int>vector MyContainer;
+vector[int] MyContainer;
+b
+A recursive method is a:
+method that calls itself
+variable that calls itself
+argument that calls itself
+condition that calls itself
+a
