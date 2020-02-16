@@ -1,4 +1,4 @@
-﻿/*Quiz game v4 - it's a game that read the questions from a text file. The application'll try to open the text file in application folder.
+﻿/*Quiz game v5 - it's a game that read the questions from a text file. The application'll try to open the text file in application folder.
  * If opening the text file fails, you will be asked for the file path.*/
 
 #include <iostream>
@@ -13,7 +13,7 @@ using namespace std;
 
 int points_Sum = 0;                                                     //Declarate global integer of sum points.
 
-string file_Patch = "Quiz.txt";                                         //Declarate global string of question file patch.
+string questions_Patch = "Question.txt";                                //Declarate global string of question file patch.
 
 fstream file;                                                           //Declarate file stream variable file.
 
@@ -40,7 +40,7 @@ public:
 
         int first_Line = (number - 1) * 6;                              //Compute the first line number for current question.
 
-        question_File.open (file_Patch, ios::in);                       //Open question_File with file_Patch to read.
+        question_File.open (questions_Patch, ios::in);                  //Open question_File with questions_Patch to read.
 
         while (getline (question_File, temporary_Line))                 //Assign question_File lines to temporary_Line.
         {
@@ -129,29 +129,29 @@ public:
     }
 };
 
-bool File_Exists (string &patch)                                        //Function test if the file exists with input of file patch (by reference).
+bool Check_Question_Patch (string& patch)                               //Check if Question.txt patch is correct.
 {
-    file.open (patch, ios::in);                                         //Open file with patch to read.
+    file.open (patch, ios::in);                                         //Open file to read.
 
-    if (! file.good())                                                  //Negation if the patch is correct.
+    if (! file.good())                                                  //If patch isn't correct.
     {
-        cout << "\nThe question file doesn't exists!\nPlease write the quesion file patch or write END then press ENTER to exit application: ";
+        cout << "\nWrong Questions.txt file patch!\nPlease write the correct Questions.txt file patch or write END then press ENTER to exit application: ";
         
-        cin >> patch;                                                   //Change file patch or exit application with command END.
+        cin >> patch;                                                   //Change patch or exit application with END.
         
         if (patch == "END")
         {
             exit(0);                                                    //Exit application.
         }
 
-        return false;                                                   //If the quesion file not exists return true.
+        return false;                                                   //If Question.txt patch isn't correct return false.
     }
 
     else
     {
         file.close();                                                   //Close file.
 
-        return true;                                                    //If the quesion file exists return true.
+        return true;                                                    //If Question.txt patch is correct return true.
     }
 }
 
@@ -161,7 +161,7 @@ int how_Many_Lines()                                                    //Functi
 
     string line;                                                        //Declaration of temporary line.
 
-    file.open(file_Patch, ios::in);                                     //Open file with patch to read.
+    file.open(questions_Patch, ios::in);                                //Open file with patch to read.
 
     while (getline (file, line))                                        //Assign file lines to line.
     {
@@ -181,7 +181,7 @@ int main()
 
     getchar();                                                          //Stop console.
 
-    while (! File_Exists (file_Patch));                                 //If the file not exsist, the condition is true.
+    while (!Check_Question_Patch (questions_Patch));                    //If Question.txt patch isn't correct = condition's true.
 
     int how_Many_Questions = how_Many_Lines() / 6;                      //Compute number of questions in file. One question has 6 lines.
     
